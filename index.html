@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 部署指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .card {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h2 i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .steps {
+            margin: 25px 0;
+            padding-left: 20px;
+        }
+        
+        .step {
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .github-btn {
+            display: inline-block;
+            background: #24292e;
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .github-btn:hover {
+            background: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .github-btn i {
+            margin-right: 10px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .code-comment {
+            color: #75715e;
+        }
+        
+        .code-keyword {
+            color: #66d9ef;
+        }
+        
+        .code-string {
+            color: #a6e22e;
+        }
+        
+        .footer {
+            color: #6c757d;
+            font-size: 14px;
+            padding: 25px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            flex-basis: 48%;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .screenshot {
+            width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .feature {
+                flex-basis: 100%;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-github"></i> GitHub Pages 部署指南</h1>
+            <p class="subtitle">免费托管您的静态网站 | 无需服务器</p>
+        </div>
+        
+        <div class="content">
+            <div class="card">
+                <h2><i class="fas fa-star"></i> GitHub Pages 优势</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h3><i class="fas fa-money-bill-wave"></i> 完全免费</h3>
+                        <p>无需支付任何费用，无限期托管</p>
+                    </div>
+                    <div class="feature">
+                        <h3><i class="fas fa-lock"></i> 自动HTTPS</h3>
+                        <p>自动配置SSL证书，安全访问</p>
+                    </div>
+                    <div class="feature">
+                        <h3><i class="fas fa-globe"></i> 自定义域名</h3>
+                        <p>支持绑定自己的域名</p>
+                    </div>
+                    <div class="feature">
+                        <h3><i class="fas fa-sync-alt"></i> 自动部署</h3>
+                        <p>代码更新后自动重新部署</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-list-ol"></i> 部署步骤</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3>创建GitHub账户</h3>
+                            <p>访问 <a href="https://github.com/signup" target="_blank">github.com/signup</a> 注册账户</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3>创建新仓库</h3>
+                            <p>仓库名格式: <code>yourusername.github.io</code></p>
+                            <img src="https://docs.github.com/assets/cb-11427/images/help/pages/create-repository-pages.png" alt="创建仓库" class="screenshot">
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3>上传HTML文件</h3>
+                            <p>将您的HTML文件上传到仓库（命名为index.html）</p>
+                            <img src="https://docs.github.com/assets/cb-11427/images/help/pages/upload-file.png" alt="上传文件" class="screenshot">
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3>启用GitHub Pages</h3>
+                            <p>仓库设置 → Pages → 选择分支 → 保存</p>
+                            <img src="https://docs.github.com/assets/cb-11427/images/help/pages/source-setting.png" alt="启用Pages" class="screenshot">
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <h3>访问您的网站</h3>
+                            <p>打开浏览器访问: <code>https://yourusername.github.io</code></p>
+                            <p>首次部署可能需要1-2分钟生效</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <center>
+                    <a href="https://github.com/new" class="github-btn" target="_blank">
+                        <i class="fab fa-github"></i> 创建 GitHub 仓库
+                    </a>
+                </center>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-code"></i> 项目结构示例</h2>
+                <p>最简单的HTML项目只需要一个index.html文件：</p>
+                
+                <div class="code-block">
+                    yourusername.github.io/<br>
+                    └── <span class="code-keyword">index.html</span>
+                </div>
+                
+                <p>包含CSS/JS资源的项目结构：</p>
+                
+                <div class="code-block">
+                    yourusername.github.io/<br>
+                    ├── <span class="code-keyword">index.html</span><br>
+                    ├── <span class="code-keyword">styles.css</span><br>
+                    ├── <span class="code-keyword">script.js</span><br>
+                    └── assets/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="code-keyword">image1.jpg</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="code-keyword">image2.png</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-terminal"></i> 使用Git命令行部署</h2>
+                <p>对于开发者，推荐使用Git命令行：</p>
+                
+                <div class="code-block">
+                    <span class="code-comment"># 创建新仓库目录</span><br>
+                    $ mkdir yourusername.github.io<br>
+                    $ cd yourusername.github.io<br><br>
+                    
+                    <span class="code-comment"># 初始化Git仓库</span><br>
+                    $ git init<br><br>
+                    
+                    <span class="code-comment"># 创建HTML文件</span><br>
+                    $ echo "&lt;!DOCTYPE html&gt;" >> index.html<br>
+                    $ echo "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;" >> index.html<br><br>
+                    
+                    <span class="code-comment"># 添加文件并提交</span><br>
+                    $ git add index.html<br>
+                    $ git commit -m "Initial commit"<br><br>
+                    
+                    <span class="code-comment"># 连接到GitHub仓库</span><br>
+                    $ git remote add origin https://github.com/yourusername/yourusername.github.io.git<br><br>
+                    
+                    <span class="code-comment"># 推送到GitHub</span><br>
+                    $ git push -u origin main
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-cogs"></i> 自定义域名设置</h2>
+                <p>将您的域名指向GitHub Pages：</p>
+                
+                <div class="code-block">
+                    <span class="code-comment"># DNS设置（示例）</span><br>
+                    记录类型: A<br>
+                    主机名: @ 或 www<br>
+                    值: 185.199.108.153<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;185.199.109.153<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;185.199.110.153<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;185.199.111.153
+                </div>
+                
+                <p>在仓库根目录添加CNAME文件：</p>
+                
+                <div class="code-block">
+                    <span class="code-comment"># CNAME文件内容</span><br>
+                    www.yourdomain.com
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fas fa-info-circle"></i> GitHub Pages 部署指南 &copy; 2023 | 静态网站托管的最佳免费方案</p>
+        </div>
+    </div>
+</body>
+</html>
